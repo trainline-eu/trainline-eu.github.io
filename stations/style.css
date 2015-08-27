@@ -1,0 +1,52 @@
+html, body {
+    height: 100%;
+}
+
+div#sidebar {
+    position: absolute;
+    width: 400px;
+    padding: 0 20px;
+}
+
+div#map {
+    height: 100%;
+    margin-left: 400px;
+}
+
+div#streetview {
+    height: 300px;
+    width: 360px;
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    font-size: 16pt;
+    white-space: nowrap;
+}
+
+dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+}
+
+dt:after {
+    content: " :";
+}
+
+dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0 0;
+}
+
+dl {
+margin-top: 20px;
+}
+
+.progress {
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+}
