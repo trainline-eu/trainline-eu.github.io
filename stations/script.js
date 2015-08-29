@@ -45,6 +45,11 @@ var user;
 
 function update_navbar(user_data) {
     $("#navbar").html(navbar_template(user_data));
+
+    $("#navbar").on("click", "#logout-link", function() {
+        localStorage.removeItem("github_token");
+        window.location = "./index.html";
+    });
 }
 
 function update_station(data) {
@@ -248,25 +253,36 @@ function userRepo() {
 }
 
 function init() {
-    var regex = new RegExp("[\\?&]token=([^&#]*)");
-    var results = regex.exec(location.search);
-    if (results == null) {
-        alert("We need a token!");
+    var regex = new RegExp("[\\?&]token=([^&#]*)"),
+        urlGroups = regex.exec(location.search),
+        urlToken = urlGroups === null ? null : urlGroups[1],
+        localToken = localStorage.getItem("github_token");
+
+    if (urlToken === null && localToken === null) {
+        window.location = "./index.html";
     } else {
         github = new Github({
-            token: results[1],
+            token: urlToken || localToken,
             auth: "oauth"
         });
-        console.log("so far…, token=" + results[1]);
 
-        var gh_user =  github.getUser();
+        console.log("User token is " + (urlToken || localToken) + " (" + (urlToken !== null ? "using URL token" : "using localStorage") + ")");
+
+        var gh_user = github.getUser();
 
         gh_user.user(function(err, user_infos) {
             console.log(user_infos);
-            update_navbar(user_infos);
-            if(err) {
+            if (err) {
                 alert("Could not get user informations");
+                localStorage.removeItem("github_token");
+                window.location = "./index.html";
             } else {
+                if (urlToken !== null) {
+                    localStorage.setItem("github_token", urlToken);
+                    window.location = "./edit.html" + window.location.hash;
+                }
+
+                update_navbar(user_infos);
                 user = user_infos.login;
                 ct_repo = github.getRepo('capitainetrain', 'stations');
                 repo = github.getRepo(user, userRepo());
