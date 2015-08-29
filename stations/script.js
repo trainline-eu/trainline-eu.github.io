@@ -1,5 +1,10 @@
-    var source   = $("#station-template").html();
+/**
+ * CT interactive station editor
+ */
+
+var source   = $("#station-template").html();
 var template = Handlebars.compile(source);
+var navbar_template = Handlebars.compile($("#navbar-template").html());
 
 Handlebars.registerHelper('enabled', function(value) {
     if(value == "t") {
@@ -37,6 +42,10 @@ var github;
 var ct_repo;
 var repo;
 var user;
+
+function update_navbar(user_data) {
+    $("#navbar").html(navbar_template(user_data));
+}
 
 function update_station(data) {
     station = data;
@@ -159,7 +168,7 @@ function create_pr() {
         console.log("getTree");
         repo.getCommit(new_branch, commitSHA, function(err, tree) {
             if(err) { reject(err); }
-            else { console.log("getTree ok: ") + tree.sha; console.log(tree); resolve({commit: commitSHA, tree: tree.sha}); }
+            else { console.log("getTree ok: " + tree.sha); console.log(tree); resolve({commit: commitSHA, tree: tree.sha}); }
         })
     })).then(shas => new Promise( function(resolve, reject) {
         console.log("post");
@@ -254,6 +263,7 @@ function init() {
 
         gh_user.user(function(err, user_infos) {
             console.log(user_infos);
+            update_navbar(user_infos);
             if(err) {
                 alert("Could not get user informations");
             } else {

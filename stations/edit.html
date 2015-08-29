@@ -7,32 +7,85 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css" />
 
-    <title>Station validation</title>
+    <title>CT Stations Studio</title>
   </head>
   <body>
-    <div id="sidebar">
-        <div id="station">
-          <script id="station-template" type="text/x-handlebars-template">
-          <h2><i class="fa fa-fw fa-map-marker"></i> {{name}} ({{id}}) </h2>
-          <dl>
-            <dt>Suggestable</dt><dd>{{enabled is_suggestable}}</dd>
-            <dt>SNCF</dt><dd>{{enabled sncf_is_enabled}} {{sncf_id}}</dd>
-            <dt>iDTGV</dt><dd>{{enabled idtgv_is_enabled}} {{idtgv_id}}</dd>
-            <dt>DB</dt><dd>{{enabled db_is_enabled}} {{db_id}}</dd>
-            <dt>iDBUS</dt><dd>{{enabled idbus_is_enabled}} {{idbus_id}}</dd>
-            <dt>OUIGO</dt><dd>{{enabled ouigo_is_enabled}} {{ouigo_id}}</dd>
-            <dt>Trenitalia</dt><dd>{{enabled trenitalia_is_enabled}} {{trenitalia_id}}</dd>
-            <dt>NTV</dt><dd>{{enabled ntv_is_enabled}} {{ntv_id}}</dd>
-          </dl>
-          <ul>
-          <li><a href="http://horaires.capitainetrain.com/{{slug}}" target="_blank">Voir sur horaires</a></li>
-          <li><a href="http://maps.google.com/maps?q=&layer=c&cbll={{latitude}},{{longitude}}" target="_blank" id="street-view">Google Street View</a></li>
+    <nav id="navbar" class="navbar navbar-default" style="margin-bottom: 0; border-radius: 0; border-width: 0 0 1px 0;">
+      <p style="font-size: 15pt; margin: 10px 15px;">
+        <i class="fa fa-fw fa-spinner fa-spin"></i> Loading GitHub data…
+      </p>
+      <script id="navbar-template" type="text/x-handlebars-template">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">CT Stations Studio</a>
+          </div>
+
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#"><i class="fa fa-fw fa-compass"></i> Locate</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-files-o"></i> Review changes</a></li>
+            <li><a href="#"><i class="fa fa-fw fa-code-fork"></i> Publish</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right" style="margin-right: -15px;">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="{{avatar_url}}" width="25" height="25" style="border-radius: 12px; margin: -8px 5px -5px 0;"/>
+                {{login}} <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" style="z-index: 20000;">
+                <li><a href="#"><i class="fa fa-fw fa-ban"></i> Revoke GitHub access…</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#"><i class="fa fa-fw fa-sign-out"></i> Log out from CTSS</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search station…">
+            </div>
+          </form>
+        </div>
+      </script>
+    </nav>
+    <div id="sidebar">
+        <div id="station" style="margin-top: 20px;">
+          <p><i class="fa fa-fw fa-spin fa-spinner"></i> Loading stations.csv content…</p>
+          <script id="station-template" type="text/x-handlebars-template">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title" style="font-weight: bold;">
+                <i class="fa fa-fw fa-map-marker"></i> {{name}} ({{id}})
+              </h2>
+            </div>
+            <div class="panel-body">
+              <dl style="margin-top: 0;">
+                <dt>Suggestable</dt><dd>{{enabled is_suggestable}}</dd>
+                <dt>SNCF</dt><dd>{{enabled sncf_is_enabled}} {{sncf_id}}</dd>
+                <dt>iDTGV</dt><dd>{{enabled idtgv_is_enabled}} {{idtgv_id}}</dd>
+                <dt>DB</dt><dd>{{enabled db_is_enabled}} {{db_id}}</dd>
+                <dt>iDBUS</dt><dd>{{enabled idbus_is_enabled}} {{idbus_id}}</dd>
+                <dt>OUIGO</dt><dd>{{enabled ouigo_is_enabled}} {{ouigo_id}}</dd>
+                <dt>Trenitalia</dt><dd>{{enabled trenitalia_is_enabled}} {{trenitalia_id}}</dd>
+                <dt>NTV</dt><dd>{{enabled ntv_is_enabled}} {{ntv_id}}</dd>
+              </dl>
+              <ul class="fa-ul">
+                <li>
+                  <a href="http://horaires.capitainetrain.com/{{slug}}" target="_blank">
+                    <i class="fa fa-fw fa-clock-o"></i> See on timetable.capitainetrain.com
+                  </a>
+                </li>
+                <li><a href="http://maps.google.com/maps?q=&layer=c&cbll={{latitude}},{{longitude}}" target="_blank" id="street-view">
+                  <i class="fa fa-fw fa-street-view"></i> Jump into using Google Street View</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
           </script>
         </div>
 
-        <button type="button" class="btn btn-success" id="valid">
-          <i class="fa fa-fw fa-save"></i> Sauvegarder
+        <button type="button" class="btn btn-primary" id="valid">
+          <i class="fa fa-fw fa-save"></i> Save locally
         </button>
 
       <div id="streetview"></div>
