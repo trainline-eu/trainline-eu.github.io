@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css" />
 
     <title>Station validation</title>
@@ -11,26 +12,28 @@
   <body>
     <div id="sidebar">
         <div id="station">
-            <script id="station-template" type="text/x-handlebars-template">
-      <h2> {{name}} ({{id}}) </h2>
-      <dl>
-        <dt>Suggestable</dt><dd>{{enabled is_suggestable}}</dd>
-        <dt>SNCF</dt><dd>{{enabled sncf_is_enabled}} {{sncf_id}}</dd>
-        <dt>iDTGV</dt><dd>{{enabled idtgv_is_enabled}} {{idtgv_id}}</dd>
-        <dt>DB</dt><dd>{{enabled db_is_enabled}} {{db_id}}</dd>
-        <dt>iDBUS</dt><dd>{{enabled idbus_is_enabled}} {{idbus_id}}</dd>
-        <dt>OUIGO</dt><dd>{{enabled ouigo_is_enabled}} {{ouigo_id}}</dd>
-        <dt>Trenitalia</dt><dd>{{enabled trenitalia_is_enabled}} {{trenitalia_id}}</dd>
-        <dt>NTV</dt><dd>{{enabled ntv_is_enabled}} {{ntv_id}}</dd>
-      </dl>
-      <ul>
-      <li><a href="http://horaires.capitainetrain.com/{{slug}}" target="_blank">Voir sur horaires</a></li>
-      <li><a href="http://maps.google.com/maps?q=&layer=c&cbll={{latitude}},{{longitude}}" target="_blank" id="street-view">Google Street View</a></li>
-      </ul>
-            </script>
+          <script id="station-template" type="text/x-handlebars-template">
+          <h2><i class="fa fa-fw fa-map-marker"></i> {{name}} ({{id}}) </h2>
+          <dl>
+            <dt>Suggestable</dt><dd>{{enabled is_suggestable}}</dd>
+            <dt>SNCF</dt><dd>{{enabled sncf_is_enabled}} {{sncf_id}}</dd>
+            <dt>iDTGV</dt><dd>{{enabled idtgv_is_enabled}} {{idtgv_id}}</dd>
+            <dt>DB</dt><dd>{{enabled db_is_enabled}} {{db_id}}</dd>
+            <dt>iDBUS</dt><dd>{{enabled idbus_is_enabled}} {{idbus_id}}</dd>
+            <dt>OUIGO</dt><dd>{{enabled ouigo_is_enabled}} {{ouigo_id}}</dd>
+            <dt>Trenitalia</dt><dd>{{enabled trenitalia_is_enabled}} {{trenitalia_id}}</dd>
+            <dt>NTV</dt><dd>{{enabled ntv_is_enabled}} {{ntv_id}}</dd>
+          </dl>
+          <ul>
+          <li><a href="http://horaires.capitainetrain.com/{{slug}}" target="_blank">Voir sur horaires</a></li>
+          <li><a href="http://maps.google.com/maps?q=&layer=c&cbll={{latitude}},{{longitude}}" target="_blank" id="street-view">Google Street View</a></li>
+          </ul>
+          </script>
         </div>
 
-        <button type="button" class="btn btn-success" id="valid">Sauvegarder</button>
+        <button type="button" class="btn btn-success" id="valid">
+          <i class="fa fa-fw fa-save"></i> Sauvegarder
+        </button>
 
       <div id="streetview"></div>
     </div>

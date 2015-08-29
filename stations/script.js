@@ -3,9 +3,9 @@ var template = Handlebars.compile(source);
 
 Handlebars.registerHelper('enabled', function(value) {
     if(value == "t") {
-        return "✔";
+        return new Handlebars.SafeString('<i class="fa fa-fw fa-check"></i>');
     } else {
-        return "✘";
+        return new Handlebars.SafeString('<i class="fa fa-fw fa-times"></i>');
     }
 });
 
