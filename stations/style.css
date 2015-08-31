@@ -9,7 +9,7 @@ div#sidebar {
 }
 
 div#map {
-    height: 100%;
+    height: calc(100% - 51px);
     margin-left: 400px;
 }
 
