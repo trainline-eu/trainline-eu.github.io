@@ -16,7 +16,7 @@ var gulp = require('gulp'),
     files = {
         html: path.root + '*.html',
         less : path.lessSrc + '*.less'
-    }
+    };
 
 /**
  * Tasks
