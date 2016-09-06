@@ -6796,8 +6796,8 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("stations-editor/app")["default"].create({"name":"stations-editor","version":"0.0.0+989feb19"});
+  require("stations-editor/app")["default"].create({"name":"stations-editor","version":"0.0.0+429f5fe4"});
 }
 
 /* jshint ignore:end */
-//# sourceMappingURL=stations-editor-90b357c98a4ef879fc227ce55615cb86.map
+//# sourceMappingURL=stations-editor-672f0a2868733440bb1b597ba2cd2037.map
